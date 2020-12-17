@@ -50,7 +50,7 @@ public class BookModel {
     @Override
     public String toString() {
         return "BookModel{" +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publishYear=" + publishYear +
                 ", publisher='" + publisher + '\'' +
