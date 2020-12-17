@@ -22,7 +22,7 @@ public class BookController {
     }
 
     @GetMapping("/getbook/{bookTitle}")
-    public String getBook(@PathVariable String bookTitle) throws JSONException {
+    public String getBook(@PathVariable String bookTitle) {
         if(bookTitle.contains(" ")){
             bookTitle = bookTitle.replaceAll("\\s", "_" );
         }
@@ -32,17 +32,23 @@ public class BookController {
         String url = "https://openlibrary.org/search.json?q=" + bookTitle;
         System.out.println(url);
         String bookList = restTemplate.getForObject(url, String.class);
-        JSONObject jsonObject = new JSONObject(bookList).getJSONArray("docs").getJSONObject(0);
 
-        book.setTitle(jsonObject.getString("title"));
-        book.setPublishYear(Long.parseLong(jsonObject.getString("first_publish_year")));
+        try {
+            JSONObject jsonObject = new JSONObject(bookList).getJSONArray("docs").getJSONObject(0);
 
-        if(jsonObject.has("author_name"))
-            book.setAuthor(jsonObject.getJSONArray("author_name").get(0).toString());
-        else
-            book.setAuthor("no author found");
+            book.setTitle(jsonObject.getString("title"));
+            book.setPublishYear(Long.parseLong(jsonObject.getString("first_publish_year")));
 
-        book.setPublisher(jsonObject.getJSONArray("publisher").get(0).toString());
+            if (jsonObject.has("author_name"))
+                book.setAuthor(jsonObject.getJSONArray("author_name").get(0).toString());
+            else
+                book.setAuthor("no author found");
+
+            book.setPublisher(jsonObject.getJSONArray("publisher").get(0).toString());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
 
         return book.toString();
     }
