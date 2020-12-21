@@ -4,10 +4,16 @@
 <form>
   <mat-form-field>
     <mat-label>Book</mat-label>
-    <input matInput #bookSearch>
+    <input
+      class="form-control"
+      matInput
+      [(ngModel)]="book"
+      #bookSearch
+      [ngModelOptions]="{standalone: true}"
+    >
   </mat-form-field>
   <br/>
-  <button [disabled]="bookSearch.value == 0" (click)="findBook(bookSearch.value)" type="button">Find Book(s)</button>
+  <button [disabled]="!bookSearch.value" (click)="findBook(bookSearch.value)" type="button">Find Book(s)</button>
 
 </form>
 
