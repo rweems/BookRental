@@ -5,14 +5,27 @@ import { AppComponent } from './app.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
-import {MatButtonModule, MatInputModule, MatMenuModule, MatSidenavModule, MatSliderModule} from '@angular/material';
+
+import {
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatSliderModule
+} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { BookCardComponent } from './book-card/book-card.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookSearchComponent
+    BookSearchComponent,
+    BookCardComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +37,11 @@ import {FormsModule} from '@angular/forms';
     MatButtonModule,
     MatInputModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatGridListModule,
+    FlexLayoutModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
